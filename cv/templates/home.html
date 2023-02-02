@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p> </p>
+
+<p> </p>
+
+<!--Introduction-->
+{% load static %}
+    <div class="container" >
+        <div class="card mb-3" >
+            
+            <div class="row g-0">
+            <div class="col-md-4 card-body">
+                {% load static %}
+                <img src="{% static 'images/1.jpg' %}" class="img-fluid rounded-start" alt="Concillier K" width="450px">
+            </div>
+            
+
+            <div class="col-md-8" style="background-image: url('static/images/flower6.jpg');">
+                <div class="card-body">
+                    <p></p>
+                    <h5 class="card-title display-5"> Hello, I am Coco! </h5>
+                    <p></p>
+                    <p class="card-text lead"> As a Business Analyst and Product owner, my focus was to continually redefine product functionality, flow, consistency, and usability to achieve revenue growth, reduce operational costs and increase customer satisfaction. </p>
+                    <p class="card-text lead"> People, technology and business </p>
+                    <p class="card-text lead"> Work experience from Denmark, Sweden, UK, Rwanda and Kenya.</p>
+                    <a href="{% static 'resume.pdf' %}" class="btn btn-primary" target="_blank"> Download my resume</a>
+            
+                    <p></p>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock content %}

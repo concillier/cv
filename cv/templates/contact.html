@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} Contact us {% endblock title %}
+
+{% block content %}
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<!--Contact form-->
+{% load static %} 
+<div class="container" style="background-image: url('static/images/flower6.jpg');" >
+
+    <div class="row align-items-center">
+        <div class="col-md-5 offset-md-3">
+            <p></p>
+            <p></p>
+            <div class="card" style="opacity: 1;">
+                
+                <div class="card-body">
+                    <p></p>
+                    </p><h3> Contact me </h3></p>
+
+                      <form action="", method="post">
+                      {% csrf_token %}
+                          <div class="mb-3">
+                              <label for = "id_contactname" class="form-label"> <h5> Name: </h5> </label>
+                              <input type="text" class="form-control" id="contactname" name="contact_name" maxlength="40" required="id_contactname" >
+                              <div class="errorlist" class="form-text" style= "font-size: small; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;";> * This field is required.</div>
+                            </div>
+                          <div class="mb-3">
+                            <label for="id_contactemail" class="form-label"> <h5> Email address: </h5></label>
+                            <input type="email" class="form-control" id="contaactemail" name="contact_email" required="id_contactemail">
+                            <div class="errorlist" class="form-text" style= "font-size: small; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"> * This field is required.</div>
+                          </div>
+                          <div class="mb-3">
+                            <label for="id_contactsubject" class="form-label"> <h5> Subject: </h5> </label>
+                            <input type="text" class="form-control" id="contactsubject" name="contact_subject" maxlength="50">
+                          </div>
+                          <div class="mb-3">
+                              <label for="id_contactmessage" class="form-label"> <h5> Message: </h5></label>
+                              <textarea class="form-control" id="contactmessage" rows="4" name="contact_message" maxlength="400" required="id_contactmessage"></textarea>
+                              <div class="errorlist" class="form-text" style= "font-size: small; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" > * This field is required.</div>
+                            </div>
+                          <input type="submit" class="btn btn-primary" value="Submit"></button>
+                          
+                      </form>
+                </div>
+            </div>
+            <p></p>
+            <p></p>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock content %}
