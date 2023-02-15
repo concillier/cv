@@ -26,8 +26,5 @@ urlpatterns = [
     path('contact/', cvViews.contact, name='contact'),
     path('projects/', pViews.articles_list, name='articles_list'),
     path('project/', include('projects.urls')),
-]
-
-
-#If you get an error because of this, use from django.conf.urls.static import static instead of from django.conf.urls import static
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#If you get an error because of this, use from django.conf.urls.static import static instead of from django.conf.urls import stat
