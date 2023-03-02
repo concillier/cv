@@ -1,0 +1,7 @@
+
+# add .pyc files to .gitignore
+echo ".pyc" >> .gitignore
+
+#The git rm command, along with the --cached option, deletes the file from the repository but does not delete the actual file. This means the file remains on your local system and in your working directory as an ignored file
+git rm --cached .pyc
+
