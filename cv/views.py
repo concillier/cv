@@ -3,57 +3,60 @@ from django.http import HttpResponse
 from django.http import FileResponse
 from django.http import HttpResponseRedirect
 import os
+from django.contrib import messages
 
-from .forms import contactform
-from django.core.mail import send_mail, BadHeaderError
+from .forms import ContactForm
+from .models import ContactTable
 
-#Home page
+#Function that populates the Home page
 def home(request): 
     return render(request, 'home.html')
 
-#Projects list page
+
+
+#Function that populates the Projects list page
 def projects(request):
     return render(request, 'projects.html')
 
-#Contact page first attempt that failed from https://www.youtube.com/watch?v=1ihn3iRXtsY&ab_channel=djangotutorials
-# def contact(request): 
-#     submitted = False
-#     if request.method == 'POST':
-#         form = contactform(request.POST)
-#         if form.is_valid(): 
-#             cd = form.cleaned_data
-#             assert False
-#             return HttpResponseRedirect ('contact?submitted=True')
-
-#     else:
-#             form = contactform()
-#             if 'submitted' in request.GET: 
-#                 submitted = True
-
-#     return render(request, 'contact.html', {'form': form, 'submitted': submitted})
 
 
-#Contact page second attempt
+#Function that populates the Contact page
+#This function: 
+# 1. Checks that this is a post request
+# 2. A reference to the form is obtained and stored in the variable form
+# 3. The form is tested to ensure the values entered are valid.
+# 4. The form values are obtained using form.cleaned data and stored in the cd variable
+# 5. A new ContactTable object, defined in the models.py file is created and it’s attributes are populated using the values from the form.
+# 6. The save method of the object is called.
+# All this is done because save() function only applies to model forms.
 
 def contact(request):
+    
     if request.method == 'POST': 
-        form = contactform(request.POST)
+        form = ContactForm(request.POST)
 
         if form.is_valid(): 
-            subject = "Website Inquiry"
-            body = {
-                'Name' : form.cleaned_data['contactname'],
-                'Email' : form.cleaned_data['contactemail'],
-                'Email_subject' : form.cleaned_data['contactsubject'],
-                'Message' : form.cleaned_data['contactmessage'],
-            }
-            message = "\n".join(body.values())
+            cd = form.cleaned_data
 
-            try: 
-                send_mail(subject, message, 'admin@example.com', ['admin@example.com'])
-            except BadHeaderError: 
-                return HttpResponse('Invalid Header found')
-            return redirect('home.html')
+            PortfolioMessage= ContactTable(
+                contactname = cd['contactname'],
+                contactemail = cd['contactemail'],
+                contactsubject = cd['contactsubject'],
+                contactmessage = cd['contactmessage']
+            )
 
-    form = contactform()
-    return render(request, 'contact.html', {'form': form})
+            PortfolioMessage.save()
+
+            #return a succesful message upon form submission
+            messages.success(request, 'Your message has been succesfully sent!')
+ 
+            #or return the homepage upon succesful completion of the contact form
+            #return redirect('/')
+
+    else:
+        form = ContactForm()
+
+
+    return render(request, 'contact.html', {
+        'form': form
+    })
